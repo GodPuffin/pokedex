@@ -1,17 +1,17 @@
-import { Button, Center, Group, Stack, Text } from '@mantine/core';
-import Image from 'next/image';
+import { Button, Center, Group, Stack, Text, Image, Title } from '@mantine/core';
+import NextImage from 'next/image';
 import Link from 'next/link';
 import { DarkThemeToggle } from '@/components/DarkThemeToggle';
 
 const PageNotFound = () => (
         <Center>
             <Stack align="center">
-            <Text size="xl" mt="xl">
-                404 | Page Not Found
-            </Text>
+            <Title order={2} mt="xl"><Text span c="blue" inherit>404</Text>| Page not found</Title>
             <Image
+              component={NextImage}
               src="/404.gif"
               alt="Squirtle crying"
+              radius="md"
               width={400}
               height={400}
             />
