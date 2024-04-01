@@ -14,6 +14,7 @@ const PageNotFound = () => (
               radius="md"
               width={400}
               height={400}
+              unoptimized
             />
             <Group>
                 <Button

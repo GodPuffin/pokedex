@@ -72,7 +72,10 @@ const HomePage: React.FC = () => {
       default:
         break;
     }
-    setDisplayList(sortedData);
+    const filteredData = sortedData.filter(pokemon =>
+      pokemon.name.toLowerCase().includes(search.toLowerCase())
+    );
+    setDisplayList(filteredData);
   };
 
   useEffect(() => {
@@ -80,10 +83,7 @@ const HomePage: React.FC = () => {
   }, [sortOrder, pokemonData]);
 
   useEffect(() => {
-    const filteredData = pokemonData.filter(pokemon =>
-      pokemon.name.toLowerCase().includes(search.toLowerCase())
-    );
-    setDisplayList(filteredData);
+    sortData();
   }, [search, pokemonData]);
 
   const fetchMoreData = () => {
@@ -99,8 +99,8 @@ const HomePage: React.FC = () => {
 
   return (
     <Container size="xl">
-      <Group justify="space-between">
-        <Group m={20}>
+      <Group justify="space-between" m={20}>
+        <Group>
         {isMobile ? (
             <>
             <Group gap="xs">
@@ -113,11 +113,17 @@ const HomePage: React.FC = () => {
               />
               <Popover width={300} position="bottom" withArrow shadow="md">
                 <Popover.Target>
-                  <ActionIcon><IconAdjustments /></ActionIcon>
+                  <ActionIcon
+                    size="lg"
+                  ><IconAdjustments />
+                  </ActionIcon>
                 </Popover.Target>
                 <Popover.Dropdown>
                   <Select
                     label="Sort by"
+                    allowDeselect={false}
+                    defaultValue="idAsc"
+                    leftSection={<IconAdjustments />}
                     value={sortOrder}
                     onChange={(value) => setSortOrder(value || 'idAsc')}
                     data={[
@@ -138,14 +144,16 @@ const HomePage: React.FC = () => {
         ) : (
           <>
             <TextInput
-              label="Search by name"
+              placeholder="Search by name"
               value={search}
               onChange={(event) => setSearch(event.currentTarget.value)}
               mb="md"
               leftSection={<IconSearch />}
             />
             <Select
-              label="Sort by"
+              allowDeselect={false}
+              defaultValue="idAsc"
+              leftSection={<IconAdjustments />}
               value={sortOrder}
               onChange={(value) => setSortOrder(value || 'idAsc')}
               data={[

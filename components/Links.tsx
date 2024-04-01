@@ -18,6 +18,7 @@ export function Links() {
               component="a"
               href="https://github.com/GodPuffin"
               variant="light"
+              size="lg"
             >
                 <IconBrandGithub />
             </ActionIcon>
@@ -25,6 +26,7 @@ export function Links() {
               component="a"
               href="https://web-puffinprojects.vercel.app/"
               variant="light"
+              size="lg"
             >
                 <IconWorld />
             </ActionIcon>
@@ -33,6 +35,7 @@ export function Links() {
             <>
         <Burger
           opened={drawerOpened}
+          size="lg"
           onClick={() => setDrawerOpened((o) => !o)}
             />
             <Drawer

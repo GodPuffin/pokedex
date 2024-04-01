@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Image, Text, Badge, Button, Group, LoadingOverlay } from '@mantine/core';
 import { useRouter } from 'next/router';
+import { getTypeColor, formatPokemonName } from '../../utils/utils';
 
 interface Pokemon {
   id: number;
@@ -44,29 +45,6 @@ const PokeCard: React.FC<PokeCardProps> = ({ name }) => {
     fetchPokemon();
   }, [name]);
 
-  const getTypeColor = (typeName: string): string => {
-    const typeColorMap: { [key: string]: string } = {
-      fire: 'red',
-      water: 'blue',
-      grass: 'green',
-      electric: 'yellow',
-      psychic: 'grape',
-      ice: 'cyan',
-      dragon: 'violet',
-      ghost: 'purple',
-      steel: 'gray',
-      bug: 'lime',
-      rock: 'dark',
-      fighting: 'darkred',
-      ground: 'tan',
-      poison: 'teal',
-      flying: 'indigo',
-      fairy: 'pink',
-      // Add more mappings as needed
-    };
-    return typeColorMap[typeName] || 'gray';
-  };
-
   return (
     <div style={{ width: 300, minHeight: 335 }}>
     <Card shadow="sm" padding="lg" radius="md" withBorder>
@@ -107,10 +85,5 @@ const PokeCard: React.FC<PokeCardProps> = ({ name }) => {
     </div>
   );
 };
-
-const formatPokemonName = (name: string) => name
-    .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
 
 export default PokeCard;

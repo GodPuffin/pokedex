@@ -7,7 +7,7 @@ export function DarkThemeToggle() {
   return (
       <ActionIcon
         onClick={() => toggleColorScheme()}
-        size="md"
+        size="lg"
         variant="light"
       >
         {colorScheme === 'dark' ? (
