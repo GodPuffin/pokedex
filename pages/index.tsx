@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { IconSearch, IconArrowUp, IconBrandGithub, IconWorld } from '@tabler/icons-react';
+import { IconSearch, IconArrowUp, IconAdjustments } from '@tabler/icons-react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { Container, Flex, Loader, Center, Select, TextInput, Stack, Title, Group, Affix, Button, Transition, rem, ActionIcon } from '@mantine/core';
-import { useWindowScroll } from '@mantine/hooks';
+import { Container, Flex, Loader, Center, Select, TextInput, Stack, Title, Group, Affix, Button, Transition, rem, ActionIcon, Popover } from '@mantine/core';
+import { useMediaQuery, useWindowScroll } from '@mantine/hooks';
 import PokeCard from '@/components/Card/PokeCard';
-import { DarkThemeToggle } from '@/components/DarkThemeToggle';
+import { Links } from '@/components/Links';
 
 interface PokemonBasicInfo {
   name: string;
@@ -20,6 +20,7 @@ const HomePage: React.FC = () => {
   const [sortOrder, setSortOrder] = useState('idAsc');
   const [isLoading, setIsLoading] = useState(true);
   const [scroll, scrollTo] = useWindowScroll();
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const fetchInitialPokemonData = async () => {
     setIsLoading(true);
@@ -100,47 +101,69 @@ const HomePage: React.FC = () => {
     <Container size="xl">
       <Group justify="space-between">
         <Group m={20}>
-          <TextInput
-            placeholder="Search Pokémon by name..."
-            value={search}
-            onChange={(event) => setSearch(event.currentTarget.value)}
-            mb="md"
-            leftSection={<IconSearch />}
-          />
-          <Select
-            placeholder="Sort by"
-            value={sortOrder}
-            onChange={(value) => setSortOrder(value || 'idAsc')}
-            data={[
-              { value: 'nameAsc', label: 'Name A-Z' },
-              { value: 'nameDesc', label: 'Name Z-A' },
-              { value: 'idAsc', label: 'ID Ascending' },
-              { value: 'idDesc', label: 'ID Descending' },
-              { value: 'weightAsc', label: 'Weight Ascending' },
-              { value: 'weightDesc', label: 'Weight Descending' },
-            ]}
-            mb="md"
-          />
+        {isMobile ? (
+            <>
+            <Group gap="xs">
+              <TextInput
+                label="Search by name"
+                value={search}
+                onChange={(event) => setSearch(event.currentTarget.value)}
+                mb="md"
+                leftSection={<IconSearch />}
+              />
+              <Popover width={300} position="bottom" withArrow shadow="md">
+                <Popover.Target>
+                  <ActionIcon><IconAdjustments /></ActionIcon>
+                </Popover.Target>
+                <Popover.Dropdown>
+                  <Select
+                    label="Sort by"
+                    value={sortOrder}
+                    onChange={(value) => setSortOrder(value || 'idAsc')}
+                    data={[
+                      { value: 'nameAsc', label: 'Name A-Z' },
+                      { value: 'nameDesc', label: 'Name Z-A' },
+                      { value: 'idAsc', label: 'ID Ascending' },
+                      { value: 'idDesc', label: 'ID Descending' },
+                      { value: 'weightAsc', label: 'Weight Ascending' },
+                      { value: 'weightDesc', label: 'Weight Descending' },
+                    ]}
+                    mb="md"
+                  />
+                </Popover.Dropdown>
+              </Popover>
+            </Group>
+            <Links />
+            </>
+        ) : (
+          <>
+            <TextInput
+              label="Search by name"
+              value={search}
+              onChange={(event) => setSearch(event.currentTarget.value)}
+              mb="md"
+              leftSection={<IconSearch />}
+            />
+            <Select
+              label="Sort by"
+              value={sortOrder}
+              onChange={(value) => setSortOrder(value || 'idAsc')}
+              data={[
+                { value: 'nameAsc', label: 'Name A-Z' },
+                { value: 'nameDesc', label: 'Name Z-A' },
+                { value: 'idAsc', label: 'ID Ascending' },
+                { value: 'idDesc', label: 'ID Descending' },
+                { value: 'weightAsc', label: 'Weight Ascending' },
+                { value: 'weightDesc', label: 'Weight Descending' },
+              ]}
+              mb="md"
+            />
+          </>
+        )}
         </Group>
-        <Group justify="flex-end" gap="xs">
-        <DarkThemeToggle />
-          <ActionIcon
-            component="a"
-            href="https://github.com/GodPuffin"
-            target="_blank"
-            variant="light"
-          >
-            <IconBrandGithub />
-          </ActionIcon>
-          <ActionIcon
-            component="a"
-            href="https://web-puffinprojects.vercel.app/"
-            target="_blank"
-            variant="light"
-          >
-            <IconWorld />
-          </ActionIcon>
-        </Group>
+        {!isMobile && (
+          <Links />
+        )}
       </Group>
       <InfiniteScroll
         dataLength={loadedIndices}
