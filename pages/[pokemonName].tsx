@@ -78,20 +78,25 @@ const EvolutionTree = ({ evolutionChain }: { evolutionChain: any }) => {
   const evolutionData = processChain(evolutionChain);
 
   return (
-    <Paper p="lg" shadow="xl" radius="lg" withBorder>
-      <Title order={3}>Evolution Chain</Title>
-      <Group justify="center">
-      {evolutionData.map((evolution, index) => (
-        <Stack key={index} align="center">
-          <Image
-            src={evolution.spriteUrl}
-            alt={evolution.speciesName}
-            />
-          <Text size="sm">{formatPokemonName(evolution.speciesName)}</Text>
-        </Stack>
-      ))}
-      </Group>
-    </Paper>
+    <>
+      <Paper p="lg" shadow="xl" radius="lg" withBorder>
+        <Title order={3}>Evolution Chain</Title>
+        <Group justify="center">
+          {evolutionData.map((evolution, index) => (
+                <Stack align="center">
+                  <Link href={`/${evolution.speciesName}`} key={index} passHref>
+                  <Image
+                    src={evolution.spriteUrl}
+                    alt={formatPokemonName(evolution.speciesName)}
+                    style={{ cursor: 'pointer' }}
+                  />
+                  </Link>
+                  <Text size="sm">{formatPokemonName(evolution.speciesName)}</Text>
+                </Stack>
+          ))}
+        </Group>
+      </Paper>
+    </>
   );
 };
 
