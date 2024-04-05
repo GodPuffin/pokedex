@@ -6,7 +6,7 @@ import { DarkThemeToggle } from '@/components/DarkThemeToggle';
 const PageNotFound = () => (
         <Center>
             <Stack align="center">
-            <Title order={2} mt="xl"><Text span c="blue" inherit>404</Text>| Page not found</Title>
+            <Title order={2} mt="xl"><Text span c="blue" inherit>404</Text> | Page not found</Title>
             <Image
               component={NextImage}
               src="/404.gif"

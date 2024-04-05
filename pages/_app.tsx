@@ -1,4 +1,6 @@
 import '@mantine/core/styles.css';
+import '@mantine/carousel/styles.css';
+import '@mantine/charts/styles.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { MantineProvider } from '@mantine/core';

@@ -4,21 +4,22 @@ export const getTypeColor = (typeName: string): string => {
         water: 'blue',
         grass: 'green',
         electric: 'yellow',
-        psychic: 'grape',
+        psychic: 'pink',
         ice: 'cyan',
         dragon: 'violet',
         ghost: 'purple',
-        steel: 'black',
+        steel: 'darkgray',
         bug: 'lime',
-        rock: 'dark',
+        rock: 'saddlebrown',
         fighting: 'darkred',
         ground: 'tan',
-        poison: 'teal',
+        poison: 'grape',
         flying: 'indigo',
-        fairy: 'pink',
+        fairy: 'lightpink',
+        dark: 'black',
         // Add more mappings as needed
       };
-      return typeColorMap[typeName] || 'gray';
+      return typeColorMap[typeName] || 'lightgray';
 };
 
 export const formatPokemonName = (name: string) => name

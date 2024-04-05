@@ -72,7 +72,7 @@ const PokeCard: React.FC<PokeCardProps> = ({ name }) => {
             </Group>
           </Group>
 
-          <Text size="sm" c="dimmed">
+          <Text size="sm" c="dimmed" lineClamp={3}>
             {description.replace(/[\n\f]/g, ' ')}
           </Text>
 
